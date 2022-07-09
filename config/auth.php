@@ -40,6 +40,13 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+    // TODO: Custom guard for JWT
+    'api_admin' => [
+      'driver'   => 'jwt',
+      'provider' => 'users',
+      'hash'     => false
+    ]
     ],
 
     /*
