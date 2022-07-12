@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\Admin\InvoiceController;
 use App\Http\Controllers\Api\Admin\LoginController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SliderController;
+use App\Http\Controllers\Api\Admin\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -46,10 +47,12 @@ Route::prefix('admin')->group(function () {
 
     // * Route Admin Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index', ['as' => 'admin']]);
+    Route::get('/customers', [CustomerController::class, 'index', ['as' => 'admin']]);
+
     Route::apiResource('/categories', CategoryController::class, ['except' => ['create', 'edit'], 'as' => 'admin']);
     Route::apiResource('/products', ProductController::class, ['except' => ['create', 'edit'], 'as' => 'admin']);
-    Route::resource('/invoices', InvoiceController::class, ['except' => ['create', 'edit'], 'as' => 'admin']);
-    Route::resource('/sliders', SliderController::class, ['except' => ['show', 'update', 'create', 'edit'], 'as' => 'admin']);
-    Route::get('/customers', [CustomerController::class, 'index', ['as' => 'admin']]);
+    Route::apiResource('/invoices', InvoiceController::class, ['except' => ['create', 'edit'], 'as' => 'admin']);
+    Route::apiResource('/sliders', SliderController::class, ['except' => ['show', 'update', 'create', 'edit'], 'as' => 'admin']);
+    Route::apiResource('/users', UserController::class, ['except' => ['create', 'edit'], 'as' => 'admin']);
   });
 });
