@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\LoginController;
+use App\Http\Controllers\Api\Admin\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,7 +41,9 @@ Route::prefix('admin')->group(function () {
     // logout
     Route::get('/logout', [LoginController::class, 'logout', ['as' => 'admin']]);
 
-    // * Route Dashboard
+    // * Route Admin Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index', ['as' => 'admin']]);
+    Route::apiResource('/categories', CategoryController::class, ['except' => ['create', 'edit'], 'as' => 'admin']);
+    Route::apiResource('/products', ProductController::class, ['except' => ['create', 'edit'], 'as' => 'admin']);
   });
 });
