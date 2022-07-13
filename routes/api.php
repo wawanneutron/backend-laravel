@@ -4,7 +4,7 @@ use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Api\Admin\CustomerController;
 use App\Http\Controllers\Api\Admin\DashboardController;
 use App\Http\Controllers\Api\Admin\InvoiceController;
-use App\Http\Controllers\Api\Admin\LoginController;
+use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Admin\UserController;
@@ -32,19 +32,19 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->group(function () {
 
   // * route login
-  Route::post('/login', [LoginController::class, 'index', ['as' => 'admin']]);
+  Route::post('/login', [AuthController::class, 'index', ['as' => 'admin']]);
 
   // * route group with middleware "auth:api_admin"
   Route::group(['middleware' => 'auth:api_admin'], function () {
 
-    // get data user
-    Route::get('/user', [LoginController::class, 'getUser', ['as' => 'admin']]);
+    // * get data user
+    Route::get('/user', [AuthController::class, 'getUser', ['as' => 'admin']]);
 
-    // refresh token
-    Route::get('/refresh', [LoginController::class, 'refreshToken', ['as' => 'admin']]);
+    // * refresh token
+    Route::get('/refresh', [AuthController::class, 'refreshToken', ['as' => 'admin']]);
 
-    // logout
-    Route::get('/logout', [LoginController::class, 'logout', ['as' => 'admin']]);
+    // * logout
+    Route::get('/logout', [AuthController::class, 'logout', ['as' => 'admin']]);
 
     // * Route Admin Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index', ['as' => 'admin']]);
