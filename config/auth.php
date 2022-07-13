@@ -46,6 +46,13 @@ return [
       'driver'   => 'jwt',
       'provider' => 'users',
       'hash'     => false
+    ],
+
+    // TODO: Custom guard for JWT
+    'api_customer' => [
+      'driver'   => 'jwt',
+      'provider' => 'customers',
+      'hash'     => false
     ]
   ],
 
@@ -70,6 +77,12 @@ return [
     'users' => [
       'driver' => 'eloquent',
       'model' => App\Models\User::class,
+    ],
+
+    // TODO: add provider for customer
+    'customers' => [
+      'driver' => 'eloquent',
+      'model' => App\Models\Customer::class,
     ],
 
     // 'users' => [
