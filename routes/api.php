@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Admin\AuthController;
 use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Admin\UserController;
+use App\Http\Controllers\Api\Customer\AuthController as CustomerAuthController;
 use App\Http\Controllers\Api\Customer\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -44,7 +45,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/refresh', [AuthController::class, 'refreshToken', ['as' => 'admin']]);
 
     // * logout
-    Route::get('/logout', [AuthController::class, 'logout', ['as' => 'admin']]);
+    Route::post('/logout', [AuthController::class, 'logout', ['as' => 'admin']]);
 
     // * Route Admin Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index', ['as' => 'admin']]);
@@ -64,4 +65,20 @@ Route::prefix('customer')->group(function () {
 
   // * route register
   Route::post('/register', [RegisterController::class, 'store'], ['as' => 'customer']);
+
+  // * route login
+  Route::post('/login', [CustomerAuthController::class, 'index'], ['as' => 'customer']);
+
+  // * group route with middleware "auth:api_customer"
+  Route::group(['middleware' => 'auth:api_customer'], function () {
+
+    // * data user
+    Route::get('/user', [CustomerAuthController::class, 'getUser'], ['as' => 'customer']);
+
+    //  * refresh token JWT
+    Route::get('/refresh', [CustomerAuthController::class, 'refreshToken'], ['as' => 'customer']);
+
+    //  * logout
+    Route::post('/logout', [CustomerAuthController::class, 'logout'], ['as' => 'customer']);
+  });
 });
