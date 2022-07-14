@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\Admin\ProductController;
 use App\Http\Controllers\Api\Admin\SliderController;
 use App\Http\Controllers\Api\Admin\UserController;
 use App\Http\Controllers\Api\Customer\AuthController as CustomerAuthController;
+use App\Http\Controllers\Api\Customer\DashboardCustomer;
+use App\Http\Controllers\Api\Customer\InvoiceCustomer;
 use App\Http\Controllers\Api\Customer\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -80,5 +82,11 @@ Route::prefix('customer')->group(function () {
 
     //  * logout
     Route::post('/logout', [CustomerAuthController::class, 'logout'], ['as' => 'customer']);
+
+    // * dashboard customer
+    Route::get('/dashboard', [DashboardCustomer::class, 'index'], ['as' => 'customer']);
+
+    // * invoice dashboard customer
+    Route::apiResource('/invoices', InvoiceCustomer::class, ['except' => ['create', 'store', 'edit', 'update', 'destroy'], 'as' => 'customer']);
   });
 });
