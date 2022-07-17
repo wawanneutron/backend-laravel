@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\Customer\InvoiceCustomer;
 use App\Http\Controllers\Api\Customer\RegisterController;
 use App\Http\Controllers\Api\Customer\ReviewController;
 use App\Http\Controllers\Api\Web\CategoryController as WebCategoryController;
+use App\Http\Controllers\Api\Web\ProductController as WebProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -102,4 +103,10 @@ Route::prefix('web')->group(function () {
 
   // * categories resource
   Route::apiResource('/categories', WebCategoryController::class, ['except' => ['create', 'store', 'edit', 'update', 'destroy'], 'as' => 'web']);
+
+  // * product resource
+  Route::apiResource('/products', WebProductController::class, ['except' => ['create', 'store', 'edit', 'update', 'destroy'], 'as' => 'web']);
+
+  // * slider
+  Route::get('/sliders', [SliderController::class, 'index'], ['as' => 'web']);
 });
