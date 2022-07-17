@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-//  * group route with prefix "admin"
+//  ? group route with prefix "admin"
 Route::prefix('admin')->group(function () {
 
   // * route login
@@ -63,7 +63,7 @@ Route::prefix('admin')->group(function () {
 });
 
 
-//  * group route with prefix "customer"
+//  ? group route with prefix "customer"
 Route::prefix('customer')->group(function () {
 
   // * route register
