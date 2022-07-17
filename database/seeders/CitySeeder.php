@@ -26,7 +26,7 @@ class CitySeeder extends Seeder
       City::create([
         'province_id' => $city['province_id'],
         'city_id'     => $city['city_id'],
-        'name'        => $city['city_name']
+        'name'        => $city['city_name'] . ' - ' . '(' . $city['type'] . ')',
       ]);
     }
   }
