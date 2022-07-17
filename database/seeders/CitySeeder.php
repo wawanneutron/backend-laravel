@@ -1,0 +1,33 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\City;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Http;
+
+class CitySeeder extends Seeder
+{
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    // * Fetch Rest Api
+    $response = Http::withHeaders([
+      'key' => config('services.rajaongkir.key'),
+    ])->get('https://api.rajaongkir.com/starter/city');
+
+    // * Loop data from Rest Api
+    foreach ($response['rajaongkir']['results'] as $city) {
+      City::create([
+        'province_id' => $city['province_id'],
+        'city_id'     => $city['city_id'],
+        'name'        => $city['city_name']
+      ]);
+    }
+  }
+}
