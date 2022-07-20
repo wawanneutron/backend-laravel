@@ -31,8 +31,20 @@ return [
     'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
   ],
 
+  // TODO: Raja Ongkir configuration
   'rajaongkir' => [
     'key' => env('RAJAONGKIR_API_KEY')
-  ]
+  ],
 
+  // TODO: MIdtrans configuration
+  'midtrans' => [
+    // midtrans server key
+    'serverKey' => env('MIDTRANS_SERVERKEY'),
+    // midtrans client key
+    'clientKey' => env('MIDTRANS_CLIENTKEY'),
+    // Isi false jika masih tahap development, true jika sudah di production
+    'isProduction' => env('MIDTRANS_IS_PRODUCTION'),
+    'isSanitized'  => env('MIDTRANS_IS_SANITIZED'),
+    'is3ds'        => env('MIDTRANS_IS_3DS')
+  ]
 ];
