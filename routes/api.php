@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Customer\RegisterController;
 use App\Http\Controllers\Api\Customer\ReviewController;
 use App\Http\Controllers\Api\Web\CartController;
 use App\Http\Controllers\Api\Web\CategoryController as WebCategoryController;
+use App\Http\Controllers\Api\Web\CheckoutController;
 use App\Http\Controllers\Api\Web\ProductController as WebProductController;
 use App\Http\Controllers\Api\Web\RajaOngkirController;
 use Illuminate\Http\Request;
@@ -131,4 +132,7 @@ Route::prefix('web')->group(function () {
 
   // * remove cart
   Route::post('/carts/remove', [CartController::class, 'removeCart'], ['as' => 'web']);
+
+  // * Checkout Route
+  Route::post('/checkout', [CheckoutController::class, 'store'], ['as' => 'web']);
 });
